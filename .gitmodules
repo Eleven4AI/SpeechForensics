@@ -1,3 +1,6 @@
 [submodule "av_hubert"]
 	path = av_hubert
 	url = https://github.com/facebookresearch/av_hubert.git
+[submodule "preprocessing/face-alignment"]
+	path = preprocessing/face-alignment
+	url = https://github.com/1adrianb/face-alignment.git
