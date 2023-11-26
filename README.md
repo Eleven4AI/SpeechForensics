@@ -7,7 +7,7 @@ This is a PyTorch implementation of 'What I See is not What I Hear: Audio-Visual
 1. `pip install torch==2.0.1+cu118 torchvision==0.15.2+cu118 -f https://download.pytorch.org/whl/torch_stable.html`
    (Choose the suitable version for your machine.)
 2. Clone this repository.
-3. Install dependency packages via 'pip install -r requirements.txt'
+3. Install dependency packages via `pip install -r requirements.txt`
 4. Install AV-HuBert and face-alignment
    ```bash
    git submodule init
@@ -70,9 +70,9 @@ This is a PyTorch implementation of 'What I See is not What I Hear: Audio-Visual
    (The videos in KoDF contain a lot of silent clips, 
    and when we removed them, our method achieved better performance than in the paper. ) :
 
-   FaceForensic++ | FakeAVCeleb | KoDF 
-           :------------: | :-------------: | :-------------:
-   97.6% | 99.0% | 91.7%
+   | FaceForensic++ | FakeAVCeleb | KoDF |
+   | :------------: | :-------------: | :-------------: |
+   | 97.6% | 99.0% | 91.7% |
 
 ## 🔥Tips
 The anonymous code repository cannot be downloaded or cloned, if necessary, you can use the code we provide in the supplementary material.
