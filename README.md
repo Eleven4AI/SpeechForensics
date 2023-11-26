@@ -47,8 +47,8 @@ This is a PyTorch implementation of 'What I See is not What I Hear: Audio-Visual
       where `categories` includes `original_videos`, `audio-driven`, `dffs`, `dfl` and `fo` (The videos we downloaded in `fsgan` do not contain audio,
       so we couldn't test them).
       The test videos we used in our experiments are given in `data/datasets/KoDF/test_list.txt`
-3. Detect the faces and extract 68 face landmarks. Download the [RetinaFace](https://drive.google.com/open?id=1oZRSG0ZegbVkVwUd8wUIQx8W7yfZ_ki1) and [FAN](https://www.adrianbulat.com/downloads/python-fan/2DFAN4-cd938726ad.zip) pretrained models,
-   and put them in to `checkpoints/Resnet50_Final.pth`. Run
+3. Detect the faces and extract 68 face landmarks. Download the [RetinaFace](https://drive.google.com/open?id=1oZRSG0ZegbVkVwUd8wUIQx8W7yfZ_ki1) pretrained model,
+   and put it to `checkpoints/Resnet50_Final.pth`. Run
    ```bash
    python preprocessing/face-alignment/landmark_extract.py --video_root $video_root --file_list $file_list --out_dir $out_dir
    ```
