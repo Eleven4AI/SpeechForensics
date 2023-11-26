@@ -52,13 +52,14 @@ This is a PyTorch implementation of 'What I See is not What I Hear: Audio-Visual
    ```bash
    python preprocessing/landmark_extract.py --video_root $video_root --file_list $file_list --out_dir $out_dir
    ```
+   - $video_root: root directory of videos.
+   - $file_list: a txt file containing names of videos. We provide the filelists in the `data/datasets/` directory.
+   - $out_dir: directory for saving landmarks.
 4. To crop the mouth region from each video, run
     ```bash
    python preprocessing/align_mouth.py --video_root $video_root --file_list $file_list --landmarks_dir $landmarks_dir --out_dir $out_dir
     ```
-    This will write the mouth videos into the `out_dir` directory.
-
-
+   - $out_dir: directory for saving cropped mouth videos
 ## Evaluate
 1. Download the pretrained Audio-Visual Speech Representation model [here](https://dl.fbaipublicfiles.com/avhubert/model/lrs3_vox/clean-pretrain/large_vox_iter5.pt).
    And put it to `checkpoints/large_vox_iter5.pt`.
@@ -69,7 +70,7 @@ This is a PyTorch implementation of 'What I See is not What I Hear: Audio-Visual
    The AUC scores of different forgery datasets are shown in below 
    (The videos in KoDF contain a lot of silent clips, 
    and when we removed them, our method achieved better performance than in the paper. ) :
-----------
+
    | FaceForensic++ | FakeAVCeleb | KoDF |
    | :------------: | :-------------: | :-------------: |
    | 97.6% | 99.0% | 91.7% |
