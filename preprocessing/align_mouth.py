@@ -3,8 +3,8 @@ import numpy as np
 from tqdm import tqdm
 import os
 import os.path as osp
-from av_hubert.avhubert.preparation.align_mouth import landmarks_interpolate, crop_patch, write_video_ffmpeg
-
+from utils import landmarks_interpolate, crop_patch, write_video_ffmpeg
+import argparse
 import subprocess
 from glob import glob
 import shutil
@@ -13,6 +13,7 @@ import json
 
 #Extract mouth ROI
 STD_SIZE = (256, 256)
+mean_face_path = "data/20words_mean_face.npy"
 mean_face_landmarks = np.load(mean_face_path)
 stablePntsIDs = [33, 36, 39, 42, 45]
 def preprocess_video(input_video_path, output_video_path,landmark_path=None,fps=25):

@@ -7,20 +7,22 @@ from tqdm import tqdm
 import os
 import os.path as osp
 import sys
-from av_hubert.avhubert.preparation.align_mouth import landmarks_interpolate, crop_patch, write_video_ffmpeg
 from base64 import b64encode
 import tempfile
 from argparse import Namespace
-from av_hubert.fairseq import checkpoint_utils, options, tasks, utils
-from av_hubert.fairseq.dataclass.configs import GenerationConfig
+import utils as avhubert_utils
+from av_hubert.fairseq.fairseq import checkpoint_utils, options, tasks
+import av_hubert.fairseq.fairseq.utils as fairseq_utils
+from av_hubert.fairseq.fairseq.dataclass.configs import GenerationConfig
 from glob import glob
 from scipy.io import wavfile
 import shutil
-import av_hubert.avhubert.utils as avhubert_utils
+#from av_hubert.avhubert import utils as avhubert_utils
 import soundfile as sf
 import json
 import torch.nn.functional as F
 from sklearn import metrics
+import argparse
 
 
 def calc_cos_dist(feat1,feat2,vshift=15):
@@ -142,7 +144,7 @@ def evaluate_auc(args):
 
 if __name__=='__main__':
     parser = argparse.ArgumentParser(description='Extracting facial landmarks', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-    parser.add_argument('--checkpoint_path',type=str,default='./checkpoints/large_vox_iter5.pt',help='checkpoint path')
+    parser.add_argument('--checkpoint_path',type=str,default='checkpoints/large_vox_iter5.pt',help='checkpoint path')
     parser.add_argument('--video_root', type=str,required=True,help='video root dir')
     parser.add_argument('--file_list',type=str,required=True,help='file list')
     parser.add_argument('--mouth_dir',type=str,required=True,help='cropped mouth dir')
@@ -153,7 +155,7 @@ if __name__=='__main__':
 
     ckpt_path = args.checkpoint_path
     user_dir = os.getcwd()
-    utils.import_user_module(Namespace(user_dir=user_dir))
+    fairseq_utils.import_user_module(Namespace(user_dir=user_dir))
     models, saved_cfg, task = checkpoint_utils.load_model_ensemble_and_task([ckpt_path])
     model = models[0]
     if hasattr(models[0], 'decoder'):
@@ -161,7 +163,7 @@ if __name__=='__main__':
         model = models[0].encoder.w2v_model
     else:
         print(f"Checkpoint: pre-trained w/o fine-tuning")
-    model.cuda(0)
+    model.cuda()
     model.eval()
 
     evaluate_auc(args)

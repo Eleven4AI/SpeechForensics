@@ -59,16 +59,15 @@ if __name__=='__main__':
     parser.add_argument('--video_root', type=str,required=True,help='video root dir')
     parser.add_argument('--file_list',type=str,required=True,help='file list')
     parser.add_argument('--out_dir', type=str,required=True,help='landmark dir')
-    parser.add_argument('--face_detector', type=str,default='checkpoints/2DFAN4-cd938726ad.zip',
+    parser.add_argument('--face_detector', type=str,default='checkpoints/Resnet50_Final.pth',
                         help='path to face detector')
-    parser.add_argument('--face_predictor', type=str,default='checkpoints/Resnet50_Final.pth',
+    parser.add_argument('--face_predictor', type=str,default='checkpoints/2DFAN4-cd938726ad.zip',
                         help='path to landmark predictor')
     parser.add_argument('--ffmpeg', type=str, default='/usr/bin/ffmpeg',
                         help='ffmpeg path')
     args = parser.parse_args()
 
     fa=face_alignment.FaceAlignment(face_alignment.LandmarksType.TWO_D,face_detector='retinaface',device='cuda',
-                                    landmark_predict_path=args.face_predictor,
                                     face_detector_kwargs={'path_to_detector':args.face_detector})
 
     detect_save_landmark_68(args)

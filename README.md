@@ -21,14 +21,14 @@ This is a PyTorch implementation of 'What I See is not What I Hear: Audio-Visual
    cd fairseq
    pip install --editable ./
    ```
-6. Replace `av_hubert/avhubert/preparation/align_mouth.py` with `modification/av_hubert/align_mouth.py`
-   ```bash
-   cp modification/av_hubert/align_mouth.py av_hubert/avhubert/preparation/align_mouth.py
-   ```
-7. Install FFmpeg. We use version=4.2.2.
-8. Put the `modification/retinaface` in `preprocessing/face-alignment/face_alignment/detection`
+6. Install FFmpeg. We use version=4.2.2.
+7. Put the `modification/retinaface` in `preprocessing/face-alignment/face_alignment/detection`
    ```bash
    cp -r modification/retinaface preprocessing/face-alignment/face_alignment/detection
+   ```
+   Copy the `modification/landmark_extract.py` to `preprocessing/face-alignment/landmark_extract.py`
+   ```bash
+   cp modification/landmark_extract.py preprocessing/face-alignment
    ```
 
 ### Prepare data
@@ -48,18 +48,17 @@ This is a PyTorch implementation of 'What I See is not What I Hear: Audio-Visual
       so we couldn't test them).
       The test videos we used in our experiments are given in `data/datasets/KoDF/test_list.txt`
 3. Detect the faces and extract 68 face landmarks. Download the [RetinaFace](https://drive.google.com/open?id=1oZRSG0ZegbVkVwUd8wUIQx8W7yfZ_ki1) and [FAN](https://www.adrianbulat.com/downloads/python-fan/2DFAN4-cd938726ad.zip) pretrained models,
-   and put them in the `preprocessing/checkpoints`. Run
+   and put them in to `checkpoints/Resnet50_Final.pth`. Run
    ```bash
-   python preprocessing/landmark_extract.py --video_root $video_root --file_list $file_list --out_dir $out_dir
+   python preprocessing/face-alignment/landmark_extract.py --video_root $video_root --file_list $file_list --out_dir $out_dir
    ```
-   - $video_root: root directory of videos.
-   - $file_list: a txt file containing names of videos. We provide the filelists in the `data/datasets/` directory.
-   - $out_dir: directory for saving landmarks.
 4. To crop the mouth region from each video, run
     ```bash
    python preprocessing/align_mouth.py --video_root $video_root --file_list $file_list --landmarks_dir $landmarks_dir --out_dir $out_dir
     ```
-   - $out_dir: directory for saving cropped mouth videos
+    This will write the mouth videos into the `out_dir` directory.
+
+
 ## Evaluate
 1. Download the pretrained Audio-Visual Speech Representation model [here](https://dl.fbaipublicfiles.com/avhubert/model/lrs3_vox/clean-pretrain/large_vox_iter5.pt).
    And put it to `checkpoints/large_vox_iter5.pt`.
@@ -71,9 +70,9 @@ This is a PyTorch implementation of 'What I See is not What I Hear: Audio-Visual
    (The videos in KoDF contain a lot of silent clips, 
    and when we removed them, our method achieved better performance than in the paper. ) :
 
-   | FaceForensic++ | FakeAVCeleb | KoDF |
-   | :------------: | :-------------: | :-------------: |
-   | 97.6% | 99.0% | 91.7% |
+   FaceForensic++ | FakeAVCeleb | KoDF 
+           :------------: | :-------------: | :-------------:
+   97.6% | 99.0% | 91.7%
 
 ## 🔥Tips
 The anonymous code repository cannot be downloaded or cloned, if necessary, you can use the code we provide in the supplementary material.
