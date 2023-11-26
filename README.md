@@ -7,7 +7,7 @@ This is a PyTorch implementation of 'What I See is not What I Hear: Audio-Visual
 1. `pip install torch==2.0.1+cu118 torchvision==0.15.2+cu118 -f https://download.pytorch.org/whl/torch_stable.html`
    (Choose the suitable version for your machine.)
 2. Clone this repository.
-3. Install dependency packages via `pip install -r requirements.txt`
+3. Install dependency packages via `pip install -r requirements.txt`.
 4. Install AV-HuBert and face-alignment
    ```bash
    git submodule init
@@ -52,11 +52,14 @@ This is a PyTorch implementation of 'What I See is not What I Hear: Audio-Visual
    ```bash
    python preprocessing/face-alignment/landmark_extract.py --video_root $video_root --file_list $file_list --out_dir $out_dir
    ```
+   - $video_root: root directory of videos.
+   - $file_list: a txt file containing names of videos. We provide the filelists in the `data/datasets/` directory.
+   - $out_dir: directory for saving landmarks.
 4. To crop the mouth region from each video, run
-    ```bash
+   ```bash
    python preprocessing/align_mouth.py --video_root $video_root --file_list $file_list --landmarks_dir $landmarks_dir --out_dir $out_dir
-    ```
-    This will write the mouth videos into the `out_dir` directory.
+   ```
+   - $out_dir: directory for saving cropped mouth videos.
 
 
 ## Evaluate
