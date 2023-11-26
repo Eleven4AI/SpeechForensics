@@ -8,19 +8,25 @@ This is a PyTorch implementation of 'What I See is not What I Hear: Audio-Visual
    (Choose the suitable version for your machine.)
 2. Clone this repository.
 3. Install dependency packages via 'pip install -r requirements.txt'
-4. Install AV-HuBert and Fairseq
+4. Install AV-HuBert and face-alignment
    ```bash
    git submodule init
    git submodule update
-   cd av_hubert/fairseq
+   ```
+5. Install Fairseq
+   ```
+   cd av_hubert
+   git submodule init
+   git submodule update
+   cd fairseq
    pip install --editable ./
    ```
-5. Replace `av_hubert/avhubert/preparation/align_mouth.py` with `modification/av_hubert/align_mouth.py`
+6. Replace `av_hubert/avhubert/preparation/align_mouth.py` with `modification/av_hubert/align_mouth.py`
    ```bash
    cp modification/av_hubert/align_mouth.py av_hubert/avhubert/preparation/align_mouth.py
    ```
-6. Install FFmpeg. We use version=4.2.2.
-7. Put the `modification/retinaface` in `preprocessing/face-alignment/face_alignment/detection`
+7. Install FFmpeg. We use version=4.2.2.
+8. Put the `modification/retinaface` in `preprocessing/face-alignment/face_alignment/detection`
    ```bash
    cp -r modification/retinaface preprocessing/face-alignment/face_alignment/detection
    ```
@@ -63,10 +69,10 @@ This is a PyTorch implementation of 'What I See is not What I Hear: Audio-Visual
    The AUC scores of different forgery datasets are shown in below 
    (The videos in KoDF contain a lot of silent clips, 
    and when we removed them, our method achieved better performance than in the paper. ) :
-
-   FaceForensic++ | FakeAVCeleb | KoDF 
-           :------------: | :-------------: | :-------------:
-   97.6% | 99.0% | 91.7%
+----------
+   | FaceForensic++ | FakeAVCeleb | KoDF |
+   | :------------: | :-------------: | :-------------: |
+   | 97.6% | 99.0% | 91.7% |
 
 ## 🔥Tips
 The anonymous code repository cannot be downloaded or cloned, if necessary, you can use the code we provide in the supplementary material.
