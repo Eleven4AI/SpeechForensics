@@ -1,5 +1,5 @@
-# AVSR-forensics
-This is a PyTorch implementation of 'What I See is not What I Hear: Audio-Visual Speech Representation Learning for Forgery Detection'.
+# SpeechForensics
+This is a PyTorch implementation of 'SpeechForensics: Audio-Visual Speech Representation Learning for Face Forgery Detection'.
 
 ![Model_Overview](docs/images/method.png)
 ## Setup
@@ -37,6 +37,19 @@ This is a PyTorch implementation of 'What I See is not What I Hear: Audio-Visual
     * [FakeAVCeleb](https://github.com/DASH-Lab/FakeAVCeleb)
     * [KoDF](https://github.com/deepbrainai-research/kodf)
 2. Place the videos in the corresponding directories.
+   ```
+   your_dataset_root
+   |--FaceForensics
+      |--c23
+         |--Deepfakes
+            |--videos
+               |--000.mp4
+   |--FakeAVCeleb
+      |--videos
+         |--RealVideo-RealAudio
+            |--Africa
+               |--man
+   ```
     * The directory structure of FaceForensics++: `your_dataset_root/FaceForensics/{compression}/{categories}/videos/{video}`,
     where `categorise` is `real`, `fake/Deepfakes`, `fake/FaceSwap`, `fake/Face2Face` or `fake/NeuralTextures`. `compression` is `c0`, `c23` or `c40`.
     The test videos we used in our experiments are given in `data/datasets/FaceForensics/test_list.txt`.
@@ -47,7 +60,7 @@ This is a PyTorch implementation of 'What I See is not What I Hear: Audio-Visual
       where `categories` includes `original_videos`, `audio-driven`, `dffs`, `dfl` and `fo` (The videos we downloaded in `fsgan` do not contain audio,
       so we couldn't test them).
       The test videos we used in our experiments are given in `data/datasets/KoDF/test_list.txt`
-3. Detect the faces and extract 68 face landmarks. Download the [RetinaFace](https://drive.google.com/open?id=1oZRSG0ZegbVkVwUd8wUIQx8W7yfZ_ki1) pretrained model,
+4. Detect the faces and extract 68 face landmarks. Download the [RetinaFace](https://drive.google.com/open?id=1oZRSG0ZegbVkVwUd8wUIQx8W7yfZ_ki1) pretrained model,
    and put it to `checkpoints/Resnet50_Final.pth`. Run
    ```bash
    python preprocessing/face-alignment/landmark_extract.py --video_root $video_root --file_list $file_list --out_dir $out_dir
@@ -55,7 +68,7 @@ This is a PyTorch implementation of 'What I See is not What I Hear: Audio-Visual
    - $video_root: root directory of videos.
    - $file_list: a txt file containing names of videos. We provide the filelists in the `data/datasets/` directory.
    - $out_dir: directory for saving landmarks.
-4. To crop the mouth region from each video, run
+5. To crop the mouth region from each video, run
    ```bash
    python preprocessing/align_mouth.py --video_root $video_root --file_list $file_list --landmarks_dir $landmarks_dir --out_dir $out_dir
    ```
@@ -69,13 +82,11 @@ This is a PyTorch implementation of 'What I See is not What I Hear: Audio-Visual
    ```bash
    python evaluation/evaluate.py --video_root $video_root --file_list $file_list --mouth_dir $cropped_mouth_dir
    ```
-   The AUC scores of different forgery datasets are shown in below 
-   (The videos in KoDF contain a lot of silent clips, 
-   and when we removed them, our method achieved better performance than in the paper. ) :
+   The AUC scores of different forgery datasets are shown in below:
 
    | FaceForensic++ | FakeAVCeleb | KoDF |
    | :------------: | :-------------: | :-------------: |
    | 97.6% | 99.0% | 91.7% |
 
 ## 🔥Tips
-The anonymous code repository cannot be downloaded or cloned, if necessary, you can use the code we provide in the supplementary material.
+The anonymous code repository can neither be downloaded nor cloned, if necessary, check the codes we provide in the supplementary material.
