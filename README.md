@@ -87,6 +87,3 @@ This is a PyTorch implementation of 'SpeechForensics: Audio-Visual Speech Repres
    | FaceForensic++ | FakeAVCeleb | KoDF |
    | :------------: | :-------------: | :-------------: |
    | 97.6% | 99.0% | 91.7% |
-
-## 🔥Tips
-The anonymous code repository can neither be downloaded nor cloned, if necessary, check the codes we provide in the supplementary material.
