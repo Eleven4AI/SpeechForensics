@@ -45,6 +45,7 @@ def extract_visual_feature(video_path,max_length):
       avhubert_utils.CenterCrop((task.cfg.image_crop_size, task.cfg.image_crop_size)),
       avhubert_utils.Normalize(task.cfg.image_mean, task.cfg.image_std)])
 
+    frames = avhubert_utils.load_video(video_path)
     video = cv2.VideoCapture(video_path)
     fps=video.get(cv2.CAP_PROP_FPS)
     video.release()
