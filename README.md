@@ -1,5 +1,5 @@
-# SpeechForensics
-This is a PyTorch implementation of 'SpeechForensics: Audio-Visual Speech Representation Learning for Face Forgery Detection'.
+# SpeechForensics (NeurIPS 2024)
+This is a PyTorch implementation of `SpeechForensics: Audio-Visual Speech Representation Learning for Face Forgery Detection`.
 
 ![Model_Overview](docs/images/method.png)
 ## Setup
@@ -33,7 +33,7 @@ This is a PyTorch implementation of 'SpeechForensics: Audio-Visual Speech Repres
 
 ### Prepare data
 1. Follow the links below to download the datasets (you will be asked to fill out some forms before downloading):
-    * [FaceForensics++](https://github.com/ondyari/FaceForensics) (Download the [audio](https://github.com/ondyari/FaceForensics/tree/master/dataset#audio) according to the youtube ids and extract audio clips using the frame numbers that can obtained by downloading the 'original_youtube_videos_info'. )
+    * [FaceForensics++](https://github.com/ondyari/FaceForensics) (Download the [audio](https://github.com/ondyari/FaceForensics/tree/master/dataset#audio) according to the youtube ids and extract audio clips using the frame numbers that can obtained by downloading the 'original_youtube_videos_info'. Alternatively, you may download it from this [link](https://drive.google.com/file/d/1Cu1JVmAoTbssAQ290DxNVnaBdRmEotWP/view?usp=sharing).)
     * [FakeAVCeleb](https://github.com/DASH-Lab/FakeAVCeleb)
     * [KoDF](https://github.com/deepbrainai-research/kodf)
 2. Place the videos in the corresponding directories.
