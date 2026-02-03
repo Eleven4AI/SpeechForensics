@@ -1,5 +1,5 @@
 # SpeechForensics (NeurIPS 2024)
-This is a PyTorch implementation of `SpeechForensics: Audio-Visual Speech Representation Learning for Face Forgery Detection`.
+This is a PyTorch implementation of [SpeechForensics: Audio-Visual Speech Representation Learning for Face Forgery Detection](https://openreview.net/forum?id=ZsS0megTsh).
 
 ![Model_Overview](docs/images/method.png)
 ## Setup
